@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+public class SalarySlip {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        
+        System.out.print("Enter Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Basic Salary: ");
+        double salary = sc.nextDouble();
+
+        System.out.print("Enter Performance Grade (A/B/C/D/E): ");
+        char grade = sc.next().charAt(0);
+
+        
+        double DA = 0.10 * salary;
+        double HRA = 0.05 * salary;
+        double MA = 0.07 * salary;
+        double SA = 0.13 * salary;
+
+        
+        double incentivePercent = switch (grade) {
+            case 'A' -> 1.00;
+            case 'B' -> 0.80;
+            case 'C' -> 0.60;
+            case 'D' -> 0.30;
+            case 'E' -> 0.05;
+            default -> 0.0;
+        };
+        double incentive = salary * incentivePercent;
+
+        
+        double totalSalary = salary + DA + HRA + MA + SA + incentive;
+
+        
+        double tax = 0;
+        if (totalSalary > 2000000) {
+            tax = 0.30 * totalSalary;
+        } else if (totalSalary > 1000000) {
+            tax = 0.20 * totalSalary;
+        } else if (totalSalary > 500000) {
+            tax = 0.10 * totalSalary;
+        }
+
+        double PF = 0.10 * totalSalary;
+
+        double netIncome = totalSalary - tax - PF;
+        System.out.println("\n--- Salary Slip ---");
+        System.out.println("Name        : " + name);
+        System.out.println("Grade       : " + grade);
+        System.out.println("Basic Salary: " + salary);
+        System.out.println("DA          : " + DA);
+        System.out.println("HRA         : " + HRA);
+        System.out.println("MA          : " + MA);
+        System.out.println("SA          : " + SA);
+        System.out.println("Incentive   : " + incentive);
+        System.out.println("Total Salary: " + totalSalary);
+        System.out.println("PF          : " + PF);
+        System.out.println("Tax         : " + tax);
+        System.out.println("Net Income  : " + netIncome);
+    }
+}
