@@ -1,0 +1,51 @@
+import java.util.Scanner;
+
+public class SimpleATM {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double balance = 1000.00; // Initial balance
+        char choice;
+
+        do {
+            System.out.println("\n===== ATM Menu =====");
+            System.out.println("B: Balance Check");
+            System.out.println("W: Withdraw");
+            System.out.println("D: Deposit");
+            System.out.println("E: Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.next().toUpperCase().charAt(0); // Convert to uppercase
+
+            switch (choice) {
+                case 'B':
+                    System.out.println("Current Balance: ₹" + balance);
+                    break;
+
+                case 'W':
+                    System.out.print("Enter amount to withdraw: ₹");
+                    double withdraw = sc.nextDouble();
+                    if (withdraw <= balance) {
+                        balance -= withdraw;
+                        System.out.println("Withdrawal successful.");
+                    } else {
+                        System.out.println("Insufficient balance!");
+                    }
+                    break;
+
+                case 'D':
+                    System.out.print("Enter amount to deposit: ₹");
+                    double deposit = sc.nextDouble();
+                    balance += deposit;
+                    System.out.println("Deposit successful.");
+                    break;
+
+                case 'E':
+                    System.out.println("Thank you for using ATM. Goodbye!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice! Please enter B, W, D or E.");
+            }
+
+        } while (choice != 'E');
+    }
+}
