@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class TODBilling {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double ratePerUnit = 7.00; // base rate per unit (example)
+        double morningDiscount = 0.75; // 25% discount → pay 75%
+        double eveningMultiplier = 3.00; // 3x rate for peak hours
+        double normalRate = 1.00; // no change
+
+        System.out.println("Enter units consumed from 6 AM to 6 PM:");
+        double morningUnits = sc.nextDouble();
+
+        System.out.println("Enter units consumed from 6 PM to 10 PM:");
+        double eveningUnits = sc.nextDouble();
+
+        System.out.println("Enter units consumed from 10 PM to 6 AM:");
+        double nightUnits = sc.nextDouble();
+
+        // Calculate bill
+        double morningCharge = morningUnits * ratePerUnit * morningDiscount;
+        double eveningCharge = eveningUnits * ratePerUnit * eveningMultiplier;
+        double nightCharge = nightUnits * ratePerUnit * normalRate;
+
+        double totalBill = morningCharge + eveningCharge + nightCharge;
+
+        // Display bill breakdown
+        System.out.println("\n--- Electricity Bill Breakdown ---");
+        System.out.printf("Morning (6 AM - 6 PM): %.2f units × ₹%.2f = ₹%.2f\n",
+                morningUnits, ratePerUnit * morningDiscount, morningCharge);
+        System.out.printf("Evening (6 PM - 10 PM): %.2f units × ₹%.2f = ₹%.2f\n",
+                eveningUnits, ratePerUnit * eveningMultiplier, eveningCharge);
+        System.out.printf("Night (10 PM - 6 AM): %.2f units × ₹%.2f = ₹%.2f\n",
+                nightUnits, ratePerUnit * normalRate, nightCharge);
+
+        System.out.printf("\nTotal Electricity Bill: ₹%.2f\n", totalBill);
+    }
+}
